@@ -1,0 +1,27 @@
+<ion-content>
+  <ion-header>
+    <ion-toolbar>
+      <ion-title>
+        Películas
+        <ion-badge>{{ movieService.totalFavorites() }}</ion-badge>
+      </ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <ion-searchbar (ionInput)="onSearch($event)" debounce="500"></ion-searchbar>
+  <ion-list>
+    @for (movie of movieService.movies(); track movie.imdbID) {
+      <ion-item [routerLink]="['/movie', movie.imdbID]">
+        <ion-label>
+          <h2>{{ movie.Title }}</h2>
+          <p>{{ movie.Year }}</p>
+        </ion-label>
+        <ion-icon
+          name="heart"
+          [color]="movieService.isFavorite(movie.imdbID) ? 'danger' : 'medium'">
+        </ion-icon>
+      </ion-item>
+    } @empty {
+      <ion-item>Introduzca un término de búsqueda para comenzar.</ion-item>
+    }
+  </ion-list>
+</ion-content>

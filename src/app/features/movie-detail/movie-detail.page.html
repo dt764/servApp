@@ -1,0 +1,25 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Detalle de la película</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  @if (movieService.currentMovie(); as movie) {
+    <ion-card>
+      <img [src]="movie.Poster" />
+      <ion-card-header>
+        <ion-card-title>{{ movie.Title }}</ion-card-title>
+        <ion-card-subtitle>{{ movie.Year }}</ion-card-subtitle>
+      </ion-card-header>
+      <ion-card-content>
+      </ion-card-content>
+      <ion-button (click)="toggleFavorite()">
+        {{ movieService.isFavorite(movie.imdbID) ? 'Quitar de favoritos' : 'Añadir a favoritos' }}
+      </ion-button>
+    </ion-card>
+  }
+</ion-content>
+
